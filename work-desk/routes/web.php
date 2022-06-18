@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,4 +23,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('company/create', [CompanyController::class, 'create']);
+Route::resource('companies', CompanyController::class);
+
+Route::get('login-dev', function (){
+    auth()->loginUsingId(1);
+});
