@@ -13,8 +13,10 @@ label{
     display: inline-block;
 }
 
-.btn{
+.my-btn{
     width: 20%;
 }
 
-
+.my-table{
+    /*background-color: #6f42c1;*/
+}

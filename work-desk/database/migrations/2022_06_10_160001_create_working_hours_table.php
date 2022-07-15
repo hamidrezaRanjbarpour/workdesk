@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('start');
             $table->dateTime('end')->nullable();
+            $table->time('activity_duration')->nullable();
             $table->foreignId('company_id')->constrained();
 //            $table->foreignId('user_id')->constrained();
             $table->timestamps();

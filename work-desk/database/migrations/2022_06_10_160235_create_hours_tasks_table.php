@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('hour_id')->constrained('working_hours');
+            $table->foreignId('project_id')->constrained();
             $table->foreignId('task_id')->constrained();
         });
     }

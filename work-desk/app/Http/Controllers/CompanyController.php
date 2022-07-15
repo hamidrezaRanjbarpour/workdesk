@@ -14,10 +14,8 @@ class CompanyController extends Controller
 
     public function index()
     {
-
-//        dd(auth()->user()->companies()->orderBy('id', 'desc')->get());
         return view('companies.index', [
-            'companies' => auth()->user()->companies()->orderBy('id', 'desc')->get()
+            'companies' => auth()->user()->companies()->latest()->get()
         ]);
     }
 
@@ -58,5 +56,11 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         //
+    }
+
+    public function showAll(){
+        return response()->json([
+            'data' =>  auth()->user()->companies()->get(['id', 'name'])
+        ]);
     }
 }

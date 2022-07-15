@@ -10,17 +10,17 @@ class Company extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function projects(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function projects()
     {
         return $this->hasMany(Project::class);
     }
 
-    public function workingHours(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function workingHours()
     {
         return $this->hasMany(WorkHour::class);
     }

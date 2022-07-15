@@ -23,16 +23,16 @@
             <tbody>
             @foreach($companies as $company)
                 <tr>
-                    <th scope="row">{{ $loop->index + 1 }}</th>
+                    <td>{{ $loop->index + 1 }}</td>
                     <td>{{ $company->id }}</td>
                     <td>{{ $company->name }}</td>
                     <td>{{ $company->salary }}</td>
                     <td>{{ $company->full_time_in_hours }}</td>
                     <td>{{ $company->updated_at }}</td>
-                    <th scope="col">
+                    <td>
                         <button type="submit" class="btn btn-outline-primary">ویرایش</button>
                         <button type="submit" class="btn btn-outline-primary">حذف</button>
-                    </th>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

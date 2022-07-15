@@ -10,6 +10,7 @@ class WorkHour extends Model
     use HasFactory;
 
     protected $table = 'working_hours';
+    protected $guarded = ['id'];
 
     public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
