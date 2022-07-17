@@ -36,41 +36,51 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">ویرایش ساعت کاری</h5>
-{{--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+                        {{--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
                     </div>
                     <div class="modal-body my-2">
-{{--                        <div class="d-flex justify-content-center align-items-center text-center">--}}
-{{--                            <div class="col text-nowrap">کد کاربر: <span class="user-code fw-bolder ticket-data"></span></div>--}}
-{{--                            <hr class="col">--}}
-{{--                            <div class="col text-nowrap">کد تیکت: <span class="ticket-code fw-bolder ticket-data"></span></div>--}}
-{{--                            <hr class="col">--}}
-{{--                            <div class="col text-nowrap">کد درس: <span class="lesson-code fw-bolder ticket-data"></span></div>--}}
-{{--                        </div>--}}
-{{--                        <div class="d-flex justify-content-center align-items-center text-center">--}}
-{{--                            <div class="col text-nowrap">نام درس: <span class="lesson-name fw-bolder ticket-data"></span></div>--}}
-{{--                            <hr class="col">--}}
-{{--                            <div class="col text-nowrap">نام کاربر: <span class="user-name fw-bolder ticket-data"></span></div>--}}
-{{--                        </div>--}}
-{{--                        <fieldset class="py-3 px-4 pm-3 mt-4">--}}
-{{--                            <legend class="fw-bolder" style="font-size: 18px">شرح درخواست</legend>--}}
-{{--                            <p class="description ticket-data px-3"></p>--}}
-{{--                        </fieldset>--}}
+                        {{--                        <div class="d-flex justify-content-center align-items-center text-center">--}}
+                        {{--                            <div class="col text-nowrap">کد کاربر: <span class="user-code fw-bolder ticket-data"></span></div>--}}
+                        {{--                            <hr class="col">--}}
+                        {{--                            <div class="col text-nowrap">کد تیکت: <span class="ticket-code fw-bolder ticket-data"></span></div>--}}
+                        {{--                            <hr class="col">--}}
+                        {{--                            <div class="col text-nowrap">کد درس: <span class="lesson-code fw-bolder ticket-data"></span></div>--}}
+                        {{--                        </div>--}}
+                        {{--                        <div class="d-flex justify-content-center align-items-center text-center">--}}
+                        {{--                            <div class="col text-nowrap">نام درس: <span class="lesson-name fw-bolder ticket-data"></span></div>--}}
+                        {{--                            <hr class="col">--}}
+                        {{--                            <div class="col text-nowrap">نام کاربر: <span class="user-name fw-bolder ticket-data"></span></div>--}}
+                        {{--                        </div>--}}
+                        {{--                        <fieldset class="py-3 px-4 pm-3 mt-4">--}}
+                        {{--                            <legend class="fw-bolder" style="font-size: 18px">شرح درخواست</legend>--}}
+                        {{--                            <p class="description ticket-data px-3"></p>--}}
+                        {{--                        </fieldset>--}}
                         <form class="needs-validation" id="update_work_hour_form" novalidate>
                             <div class="form-group mt-3 mx-2">
-                                <label for="modal-date">تاریخ</label>
-                                <input id="modal-date" class="form-input flex-group form-control" type="text" name="start" required>
-
-                                <label for="modal-start-time">ساعت ورود</label>
-                                <input id="modal-start-time" class="form-input flex-group form-control" type="text" name="start" required>
-
-                                <label for="modal-end-time">ساعت خروج</label>
-                                <input id="modal-end-time" class="form-input flex-group form-control" type="text" name="start" required>
-
+                                <div>
+                                    <label for="modal-date">تاریخ</label>
+                                    <input id="modal-date" class="form-input flex-group form-control" type="text"
+                                           name="start" required>
+                                </div>
+                                <div>
+                                    <label for="modal-start-time">ساعت ورود</label>
+                                    <input id="modal-start-time" class="form-input flex-group form-control" type="text"
+                                           name="start" required>
+                                    <button type="button" class="btn date-btn btn-outline-secondary">الان!</button>
+                                </div>
+                                <div>
+                                    <label for="modal-end-time">ساعت خروج</label>
+                                    <input id="modal-end-time" class="form-input flex-group form-control" type="text"
+                                           name="start" required>
+                                    <button type="button" class="btn date-btn btn-outline-secondary">الان!</button>
+                                </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button form="update_work_hour_form" id="edit-btn" data-row-id="" type="submit" class="btn btn-success">ویرایش</button>
+                        <button form="update_work_hour_form" id="edit-btn" data-row-id="" type="submit"
+                                class="btn btn-success">ویرایش
+                        </button>
                     </div>
                 </div>
             </div>

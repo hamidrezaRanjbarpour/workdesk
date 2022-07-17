@@ -1,13 +1,8 @@
-let dateButtons = document.querySelectorAll('.date-btn');
 
-dateButtons.forEach(function (button){
-    button.addEventListener('click', function (){
-        let inputNode = button.previousElementSibling;
-        inputNode.value = moment().format('YYYY-MM-DD HH:mm:ss');
-    })
-})
 
 $(function (){
+    setNowTime('YYYY-MM-DD HH:mm')
+
     $.ajax({
         url: "/companies/all",
         type: "GET",
@@ -28,6 +23,13 @@ $(function (){
     })
 })
 
-$(function () {
+export function setNowTime(format){
+    let dateButtons = document.querySelectorAll('.date-btn');
 
-})
+    dateButtons.forEach(function (button){
+        button.addEventListener('click', function (){
+            let inputNode = button.previousElementSibling;
+            inputNode.value = moment().format(format);
+        })
+    })
+}

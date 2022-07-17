@@ -1,10 +1,11 @@
 import {ajax_error} from '../lib/main.js'
+import {setNowTime} from './create.js'
 
 $(document).ready(function () {
 
     let table = $('#table-body')
 
-    console.log(work_hours.length)
+    console.log(work_hours)
 
     for (let i = 0; i < work_hours.length; i++) {
         let row = $(`<tr id="${work_hours[i].id}"></tr>`)
@@ -26,7 +27,7 @@ $(document).ready(function () {
         let end_time = work_hours[i].end ? moment(work_hours[i].end).format('HH:mm') : '-'
         row.append(`<td class="wk-end">${end_time}</td>`);
 
-        let activity_duration = work_hours[i].activity_duration ??= '-'
+        let activity_duration = work_hours[i].activity_duration ? moment(work_hours[i].activity_duration, 'HH:mm:ss').format('HH:mm') : '-'
         row.append(`<td>${activity_duration}</td>`);
 
         let updated_at = moment(work_hours[i].updated_at).format('HH:mm:ss | jYYYY/jMM/jDD');
@@ -41,6 +42,8 @@ $(document).ready(function () {
     $('.work_day').text(function (_, oldData) {
         return getDayOfWeek(oldData)
     });
+
+    setNowTime('HH:mm')
 
 });
 
@@ -103,7 +106,7 @@ $('#update_work_hour_form').submit(function (event){
     let formData = new FormData()
     let date = $('#modal-date').val()
     let startDate = moment(date, 'jYYYY/jM/jD').format('YYYY-MM-DD') + ' ' + $('#modal-start-time').val()
-    if($('#modal-end-time').val() != '-' || $('#modal-end-time').val() != '') {
+    if($('#modal-end-time').val() != '-' && $('#modal-end-time').val().length != 0) {
         let endDate = moment(date, 'jYYYY/jM/jD').format('YYYY-MM-DD') + ' ' + $('#modal-end-time').val()
         formData.append('end', endDate)
     }

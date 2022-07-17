@@ -77,13 +77,18 @@ class WorkingHoursController extends Controller
 //            'company_id' => 'required',
         ]);
 
-        if($validated['end']) {
+        if($request->end) {
             $start_date = Carbon::createFromFormat('Y-m-d H:i', $request->start);
             $end_date = Carbon::createFromFormat('Y-m-d H:i', $request->end);
             $validated['activity_duration'] = $start_date->diff($end_date)->format('%H:%i');
         }
+        else{
+            $validated['end'] = null;
+            $validated['activity_duration'] = null;
+        }
 
         $workHour->update($validated);
+
 
         return response()->json([
            'message' => 'work hour updated successfully'
