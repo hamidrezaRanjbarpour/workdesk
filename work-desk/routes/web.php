@@ -33,11 +33,13 @@ Route::prefix('working_hours')->group(function (){
     Route::post('update/{work_hour}', [\App\Http\Controllers\WorkingHoursController::class, 'update'])->name('working_hours.update');
     Route::delete('delete/{work_hour}', [\App\Http\Controllers\WorkingHoursController::class, 'destroy'])->name('working_hours.index');
     Route::get('{company:id}', [\App\Http\Controllers\WorkingHoursController::class, 'index'])->name('working_hours.index');
-//    Route::get('companies/all', [\App\Http\Controllers\WorkingHoursController::class, 'showAll']);
 });
-//Route::resource('working_hours', \App\Http\Controllers\WorkingHoursController::class);
 
 Route::get('login-dev', function (){
     auth()->loginUsingId(1);
     return csrf_token();
+});
+
+Route::get('side', function (){
+    return view('sidebar');
 });

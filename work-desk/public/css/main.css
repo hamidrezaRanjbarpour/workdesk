@@ -1,0 +1,6 @@
+@import "lib/fontiran.css";
+
+body {
+    font-family: 'IRANSansFaNum';
+    margin-bottom: 50px;
+}

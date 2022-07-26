@@ -46,5 +46,5 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/work_hours/create.js') }}"></script>
+    <script type="module" src="{{ asset('js/work_hours/create.js') }}"></script>
 @endsection

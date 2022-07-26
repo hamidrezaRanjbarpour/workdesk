@@ -11,7 +11,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">ردیف</th>
                 <th scope="col">کد</th>
                 <th scope="col">نام</th>
                 <th scope="col">حقوق ماهانه</th>
@@ -30,8 +30,10 @@
                     <td>{{ $company->full_time_in_hours }}</td>
                     <td>{{ $company->updated_at }}</td>
                     <td>
+                        <a href="{{ route('working_hours.index', $company->id) }}" class="btn btn-outline-success">ساعات کاری</a>
+                        <a href="#" class="btn btn-outline-warning">تسک ها</a>
                         <button type="submit" class="btn btn-outline-primary">ویرایش</button>
-                        <button type="submit" class="btn btn-outline-primary">حذف</button>
+                        <button type="submit" class="btn btn-outline-danger">حذف</button>
                     </td>
                 </tr>
             @endforeach

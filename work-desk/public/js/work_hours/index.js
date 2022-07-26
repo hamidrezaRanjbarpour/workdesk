@@ -3,6 +3,9 @@ import {setNowTime} from './create.js'
 
 $(document).ready(function () {
 
+    $('#select_month').find(`option[value=${month_filtered}]`).attr('selected', true);
+    $('#select_year').find(`option[value=${year_filtered}]`).attr('selected', true);
+
     let table = $('#table-body')
 
     console.log(work_hours)

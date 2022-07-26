@@ -15,17 +15,45 @@ class WorkingHoursController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Company $company)
+    public function index(Request $request, Company $company)
     {
         if ($company->user->id != auth()->user()->id)
             abort(403);
 
-//        dd($company->workingHours()->get());
-        $work_hours = $company->workingHours()->paginate(5);
+//        $validated = $request->validate([
+//            'start' => 'required|date_format:Y-m-d',
+//            'end' => 'nullable|date_format:Y-m-d',
+//        ]);
+
+        if ($request->from_date) {
+            $date_split = explode('-', $request->from_date);
+            $from_jalali_date = verta()->createJalaliDate($date_split[0], $date_split[1], $date_split[2]);
+        } else {
+            $from_jalali_date = verta()->startMonth();
+        }
+
+        $from_date = verta()->jalaliToGregorian($from_jalali_date->year, $from_jalali_date->month, $from_jalali_date->day);
+        $to_date = $request->to_date ?? now();
+
+        $work_hours = $company->workingHours()->when(($from_date && $to_date), function ($query) use ($from_date, $to_date) {
+            return $query->whereBetween('start', [implode('-', $from_date) . ' 00:00:00', $to_date]);
+        })->paginate(5);
+
+        $cnt = $company->workingHours()->when(($from_date && $to_date), function ($query) use ($from_date, $to_date) {
+            return $query->whereBetween('start', [implode('-', $from_date) . ' 00:00:00', $to_date]);
+        })->distinct(\DB::raw('date(start)'))->count('id');
+
+        $total_activity_duration = $company->workingHours()->whereNotNull('activity_duration')->when(($from_date && $to_date), function ($query) use ($from_date, $to_date) {
+            return $query->whereBetween('start', [implode('-', $from_date) . ' 00:00:00', $to_date]);
+        })->sum('activity_duration');
 
         return view('work_hours.index', [
             'work_hours' => $work_hours,
-            'company' => $company
+            'company' => $company,
+            'number_of_working_days' => $cnt,
+            'total_activity_duration' => $total_activity_duration,
+            'month_filtered' => $from_jalali_date->month,
+            'year_filtered' => $from_jalali_date->year,
         ]);
     }
 
@@ -37,8 +65,8 @@ class WorkingHoursController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'start' => 'required|date_format:Y-m-d H:i:s',
-            'end' => 'nullable|date_format:Y-m-d H:i:s',
+            'start' => 'required|date_format:Y-m-d H:i',
+            'end' => 'nullable|date_format:Y-m-d H:i',
             'company_id' => 'required',
         ]);
 
@@ -77,12 +105,11 @@ class WorkingHoursController extends Controller
 //            'company_id' => 'required',
         ]);
 
-        if($request->end) {
+        if ($request->end) {
             $start_date = Carbon::createFromFormat('Y-m-d H:i', $request->start);
             $end_date = Carbon::createFromFormat('Y-m-d H:i', $request->end);
             $validated['activity_duration'] = $start_date->diff($end_date)->format('%H:%i');
-        }
-        else{
+        } else {
             $validated['end'] = null;
             $validated['activity_duration'] = null;
         }
@@ -91,7 +118,7 @@ class WorkingHoursController extends Controller
 
 
         return response()->json([
-           'message' => 'work hour updated successfully'
+            'message' => 'work hour updated successfully'
         ]);
     }
 
@@ -105,7 +132,7 @@ class WorkingHoursController extends Controller
 
         $workHour->delete();
         return response()->json([
-           'message' => 'operation completed successfully.'
+            'message' => 'operation completed successfully.'
         ]);
     }
 }
