@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-{{--        <a class="navbar-brand" href="#">خانه</a>--}}
+        {{--        <a class="navbar-brand" href="#">خانه</a>--}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,10 +11,12 @@
                     <a class="nav-link" href="{{ route('working_hours.create') }}">خانه</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'working_hours.create' ? 'active' : '' }}" href="{{ route('working_hours.create') }}">ثبت ساعت کاری</a>
+                    <a class="nav-link {{ Route::currentRouteName() == 'working_hours.create' ? 'active' : '' }}"
+                       href="{{ route('working_hours.create') }}">ثبت ساعت کاری</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'companies.index' ? 'active' : '' }}" href="{{ route('companies.index') }}">
+                    <a class="nav-link {{ Route::currentRouteName() == 'companies.index' ? 'active' : '' }}"
+                       href="{{ route('companies.index') }}">
                         امور شرکت ها
                     </a>
 
@@ -30,7 +32,13 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">پروفایل</a></li>
-                        <li><a class="dropdown-item" href="#">خروج</a></li>
+                        <li>
+                            <form method="POST" action="http://localhost:8000/logout">
+                                @csrf
+                                <a class="dropdown-item" href="http://localhost:8000/logout" onclick="event.preventDefault();
+                                                this.closest('form').submit();">خروج</a>
+                            </form>
+                        </li>
                     </ul>
                 </li>
             </ul>

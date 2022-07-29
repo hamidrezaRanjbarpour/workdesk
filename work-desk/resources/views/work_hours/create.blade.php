@@ -29,11 +29,6 @@
                     <input class="form-input flex-group form-control" type="text" name="start" value="{{old('start')}}" required>
                     <button type="button" class="btn date-btn btn-outline-secondary">الان!</button>
                 </div>
-                <div class="col-6">
-                    <label for="name">ساعت خروج</label>
-                    <input class="form-input flex-group form-control" type="text" name="end" value="{{old('end')}}">
-                    <button type="button" class="btn date-btn btn-outline-secondary">الان!</button>
-                </div>
             </div>
             <hr>
             <div class="d-flex justify-content-sm-end justify-content-lg-center">

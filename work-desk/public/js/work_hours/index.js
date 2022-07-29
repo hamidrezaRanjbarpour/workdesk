@@ -144,6 +144,22 @@ $('#update_work_hour_form').submit(function (event){
 
 })
 
+$(document).on('click', '#date-filter', function (){
+    let year = $('#select_year').val();
+    let month = $('#select_month').val()
+
+    console.log(year, month)
+
+    let m = moment(`${year}/${month}`, 'jYYYY/jM')
+
+    let from_date  = m.startOf('jMonth').format('jYYYY-jMM-jDD');
+    let to_date = m.endOf('jMonth').format('jYYYY-jMM-jDD')
+
+    console.log(from_date, to_date)
+
+    window.location.search = `?from_date=${from_date}&to_date=${to_date}`
+})
+
 function getDayOfWeek(date) {
 
     let day = moment(date).day()

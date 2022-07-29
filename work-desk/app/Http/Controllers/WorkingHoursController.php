@@ -20,11 +20,6 @@ class WorkingHoursController extends Controller
         if ($company->user->id != auth()->user()->id)
             abort(403);
 
-//        $validated = $request->validate([
-//            'start' => 'required|date_format:Y-m-d',
-//            'end' => 'nullable|date_format:Y-m-d',
-//        ]);
-
         if ($request->from_date) {
             $date_split = explode('-', $request->from_date);
             $from_jalali_date = verta()->createJalaliDate($date_split[0], $date_split[1], $date_split[2]);
@@ -32,19 +27,29 @@ class WorkingHoursController extends Controller
             $from_jalali_date = verta()->startMonth();
         }
 
+        if ($request->to_date) {
+            $date_split = explode('-', $request->to_date);
+            $to_jalali_date = verta()->createJalaliDate($date_split[0], $date_split[1], $date_split[2]);
+        } else {
+            $to_jalali_date = verta()->endMonth();
+        }
+
         $from_date = verta()->jalaliToGregorian($from_jalali_date->year, $from_jalali_date->month, $from_jalali_date->day);
-        $to_date = $request->to_date ?? now();
+        $to_date = verta()->jalaliToGregorian($to_jalali_date->year, $to_jalali_date->month, $to_jalali_date->day);
+
+        $from_date = implode('-', $from_date) . ' 00:00:00';
+        $to_date = implode('-', $to_date) . ' 23:59:59';
 
         $work_hours = $company->workingHours()->when(($from_date && $to_date), function ($query) use ($from_date, $to_date) {
-            return $query->whereBetween('start', [implode('-', $from_date) . ' 00:00:00', $to_date]);
-        })->paginate(5);
+            return $query->whereBetween('start', [$from_date, $to_date]);
+        })->orderBy('id')->paginate(5);
 
         $cnt = $company->workingHours()->when(($from_date && $to_date), function ($query) use ($from_date, $to_date) {
-            return $query->whereBetween('start', [implode('-', $from_date) . ' 00:00:00', $to_date]);
+            return $query->whereBetween('start', [$from_date, $to_date]);
         })->distinct(\DB::raw('date(start)'))->count('id');
 
         $total_activity_duration = $company->workingHours()->whereNotNull('activity_duration')->when(($from_date && $to_date), function ($query) use ($from_date, $to_date) {
-            return $query->whereBetween('start', [implode('-', $from_date) . ' 00:00:00', $to_date]);
+            return $query->whereBetween('start', [$from_date, $to_date]);
         })->sum('activity_duration');
 
         return view('work_hours.index', [
@@ -66,7 +71,6 @@ class WorkingHoursController extends Controller
     {
         $validated = $request->validate([
             'start' => 'required|date_format:Y-m-d H:i',
-            'end' => 'nullable|date_format:Y-m-d H:i',
             'company_id' => 'required',
         ]);
 

@@ -16,12 +16,12 @@ require __DIR__ . '/auth.php';
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('companies.index');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth'])->name('dashboard');
 
 Route::get('companies/all', [CompanyController::class, 'showAll']);
 Route::resource('companies', CompanyController::class);
@@ -31,7 +31,7 @@ Route::prefix('working_hours')->group(function (){
     Route::get('create', [\App\Http\Controllers\WorkingHoursController::class, 'create'])->name('working_hours.create');
     Route::post('store', [\App\Http\Controllers\WorkingHoursController::class, 'store'])->name('working_hours.store');
     Route::post('update/{work_hour}', [\App\Http\Controllers\WorkingHoursController::class, 'update'])->name('working_hours.update');
-    Route::delete('delete/{work_hour}', [\App\Http\Controllers\WorkingHoursController::class, 'destroy'])->name('working_hours.index');
+    Route::delete('delete/{work_hour}', [\App\Http\Controllers\WorkingHoursController::class, 'destroy'])->name('working_hours.delete');
     Route::get('{company:id}', [\App\Http\Controllers\WorkingHoursController::class, 'index'])->name('working_hours.index');
 });
 

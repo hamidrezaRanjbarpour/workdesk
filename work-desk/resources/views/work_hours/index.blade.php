@@ -10,42 +10,45 @@
     <div class="container mt-5">
         <h5> لیست ساعات کاری شرکت {{$company->name}} </h5>
 
-        <div class="d-flex justify-content-end">
-            {{--            <div>فیلتر تاریخ</div>--}}
-            <div class="col-lg-3 col-sm-6 d-flex flex-row align-items-end">
+{{--        <form action="{{ route('working_hours.index', $company->id) }}" method="GET">--}}
+            <div class="d-flex justify-content-end">
 
-                <div class="">
-                    <label for="select_month">ماه</label>
-                    <select id="select_month" class="form-select" aria-label="Default select example">
-                        <option value="0">همه</option>
-                        <option value="1">فروردین</option>
-                        <option value="2">اردیبهشت</option>
-                        <option value="3">خرداد</option>
-                        <option value="4">تیر</option>
-                        <option value="5">مرداد</option>
-                        <option value="6">شهریور</option>
-                        <option value="7">مهر</option>
-                        <option value="8">آبان</option>
-                        <option value="9">آذر</option>
-                        <option value="10">دی</option>
-                        <option value="11">بهمن</option>
-                        <option value="12">اسفند</option>
-                    </select>
-                </div>
-                <div class="">
-                    <label for="select_year">سال</label>
-                    <select id="select_year" name="company_id" class="form-select" aria-label="Default select example">
-                        <option value="0">همه</option>
-                        <option value="1400">1400</option>
-                        <option value="1401">1401</option>
-                    </select>
-                </div>
+                <div class="col-lg-3 col-sm-6 d-flex flex-row align-items-end">
 
-                <div class="">
-                    <button type="submit" class="btn btn-primary">اعمال</button>
+                    <div class="">
+                        <label for="select_month">ماه</label>
+                        <select id="select_month" class="form-select" aria-label="Default select example">
+                            <option value="0">همه</option>
+                            <option value="1">فروردین</option>
+                            <option value="2">اردیبهشت</option>
+                            <option value="3">خرداد</option>
+                            <option value="4">تیر</option>
+                            <option value="5">مرداد</option>
+                            <option value="6">شهریور</option>
+                            <option value="7">مهر</option>
+                            <option value="8">آبان</option>
+                            <option value="9">آذر</option>
+                            <option value="10">دی</option>
+                            <option value="11">بهمن</option>
+                            <option value="12">اسفند</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <label for="select_year">سال</label>
+                        <select id="select_year" class="form-select"
+                                aria-label="Default select example">
+                            <option value="0">همه</option>
+                            <option value="1400">1400</option>
+                            <option value="1401">1401</option>
+                        </select>
+                    </div>
+
+                    <div class="">
+                        <button type="button" id="date-filter" class="btn btn-primary">اعمال</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
 
         <div>تعداد روزهای فعالیت: <span>{{ $number_of_working_days }}</span></div>
         <div>مجموع ساعات فعالیت: <span>{{ $total_activity_duration }}</span></div>
