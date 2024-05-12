@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
+use \App\Http\Controllers\WorkingHoursController;
 
 require __DIR__ . '/auth.php';
 /*
@@ -28,11 +29,11 @@ Route::resource('companies', CompanyController::class);
 //Route::get('companies/', []);
 
 Route::prefix('working_hours')->group(function (){
-    Route::get('create', [\App\Http\Controllers\WorkingHoursController::class, 'create'])->name('working_hours.create');
-    Route::post('store', [\App\Http\Controllers\WorkingHoursController::class, 'store'])->name('working_hours.store');
-    Route::post('update/{work_hour}', [\App\Http\Controllers\WorkingHoursController::class, 'update'])->name('working_hours.update');
-    Route::delete('delete/{work_hour}', [\App\Http\Controllers\WorkingHoursController::class, 'destroy'])->name('working_hours.delete');
-    Route::get('{company:id}', [\App\Http\Controllers\WorkingHoursController::class, 'index'])->name('working_hours.index');
+    Route::get('create', [WorkingHoursController::class, 'create'])->name('working_hours.create');
+    Route::post('store', [WorkingHoursController::class, 'store'])->name('working_hours.store');
+    Route::post('update/{work_hour}', [WorkingHoursController::class, 'update'])->name('working_hours.update');
+    Route::delete('delete/{work_hour}', [WorkingHoursController::class, 'destroy'])->name('working_hours.delete');
+    Route::get('{company:id}', [WorkingHoursController::class, 'index'])->name('working_hours.index');
 });
 
 Route::get('login-dev', function (){
@@ -42,4 +43,9 @@ Route::get('login-dev', function (){
 
 Route::get('side', function (){
     return view('sidebar');
+});
+
+Route::get('test', function (Type $var = null)
+{
+    dd(session()->all());
 });

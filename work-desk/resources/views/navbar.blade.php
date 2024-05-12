@@ -33,9 +33,9 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">پروفایل</a></li>
                         <li>
-                            <form method="POST" action="http://localhost:8000/logout">
+                            <form method="POST" action="{{ route('logout')}}">
                                 @csrf
-                                <a class="dropdown-item" href="http://localhost:8000/logout" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="" onclick="event.preventDefault();
                                                 this.closest('form').submit();">خروج</a>
                             </form>
                         </li>

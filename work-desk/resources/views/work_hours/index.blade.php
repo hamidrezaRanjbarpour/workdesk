@@ -18,7 +18,6 @@
                     <div class="">
                         <label for="select_month">ماه</label>
                         <select id="select_month" class="form-select" aria-label="Default select example">
-                            <option value="0">همه</option>
                             <option value="1">فروردین</option>
                             <option value="2">اردیبهشت</option>
                             <option value="3">خرداد</option>
@@ -37,9 +36,6 @@
                         <label for="select_year">سال</label>
                         <select id="select_year" class="form-select"
                                 aria-label="Default select example">
-                            <option value="0">همه</option>
-                            <option value="1400">1400</option>
-                            <option value="1401">1401</option>
                         </select>
                     </div>
 
@@ -61,7 +57,7 @@
                 <th scope="col">تاریخ</th>
                 <th scope="col">ساعت ورود</th>
                 <th scope="col">ساعت خروج</th>
-                <th scope="col">تعداد ساعت فعالیت</th>
+                <th scope="col">جمع ساعات فعالیت</th>
                 <th scope="col">تاریخ بروزرسانی</th>
                 <th scope="col">عملیات</th>
             </tr>
@@ -76,7 +72,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">ویرایش ساعت کاری</h5>
-                        {{--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+
                     </div>
                     <div class="modal-body my-2">
                         <form class="needs-validation" id="update_work_hour_form" novalidate>
@@ -118,6 +114,9 @@
         var work_hours = {
             ...@json($work_hours)
         }.data
+
+        var currentPage = @json($work_hours->currentPage());
+        var perPageCount = @json($work_hours->perPage());
 
         var month_filtered = @json($month_filtered);
         var year_filtered = @json($year_filtered);

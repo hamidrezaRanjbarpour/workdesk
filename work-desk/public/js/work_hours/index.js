@@ -4,11 +4,11 @@ import {setNowTime} from './create.js'
 $(document).ready(function () {
 
     $('#select_month').find(`option[value=${month_filtered}]`).attr('selected', true);
-    $('#select_year').find(`option[value=${year_filtered}]`).attr('selected', true);
+    // $('#select_year').find(`option[value=${year_filtered}]`).attr('selected', true);
+    makeYearsFilter(year_filtered)
+
 
     let table = $('#table-body')
-
-    console.log(work_hours)
 
     for (let i = 0; i < work_hours.length; i++) {
         let row = $(`<tr id="${work_hours[i].id}"></tr>`)
@@ -16,7 +16,7 @@ $(document).ready(function () {
         if(i % 2 == 0)
             row.attr('class', 'table-light')
 
-        row.append('<td class="wk-idx">' + (i + 1) + '</td>');
+        row.append('<td class="wk-idx">' + ((currentPage - 1) * perPageCount + i + 1) + '</td>');
 
         let dayOfWeek = work_hours[i].start ? getDayOfWeek(work_hours[i].start) : '-'
         row.append(`<td>${dayOfWeek}</td>`);
@@ -47,7 +47,6 @@ $(document).ready(function () {
     });
 
     setNowTime('HH:mm')
-
 });
 
 $(document).on('click', '.delete-hour', function (){
@@ -191,3 +190,22 @@ function getDayOfWeek(date) {
     return result
 }
 
+function makeYearsFilter(selectedYear) {
+    let from_year = '1400'
+    let currentYear = moment().format('jYYYY')
+
+    let diffYears = currentYear - from_year + 1
+
+    let items = Array.from({length: diffYears}, (v, i) => currentYear - diffYears + i + 1);
+    console.log({items, diffYears, selectedYear})
+
+    $.each(items, function (i, item) {
+        $('#select_year').append($('<option>', { 
+            value: item,
+            text : item,
+            // selected: item == selectedYear ? true: (item == currentYear ? true : false)
+        }));
+    });
+
+    $('#select_year').val(selectedYear)
+}

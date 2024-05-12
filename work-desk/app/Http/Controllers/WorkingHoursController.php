@@ -42,7 +42,7 @@ class WorkingHoursController extends Controller
 
         $work_hours = $company->workingHours()->when(($from_date && $to_date), function ($query) use ($from_date, $to_date) {
             return $query->whereBetween('start', [$from_date, $to_date]);
-        })->orderBy('id')->paginate(5);
+        })->orderBy('id', 'desc')->paginate(5)->withQueryString();
 
         $cnt = $company->workingHours()->when(($from_date && $to_date), function ($query) use ($from_date, $to_date) {
             return $query->whereBetween('start', [$from_date, $to_date]);
