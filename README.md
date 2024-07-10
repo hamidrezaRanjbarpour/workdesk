@@ -16,3 +16,6 @@ Give it a try by visiting the following link:
 ## Getting Started
 
 ## Usage
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
