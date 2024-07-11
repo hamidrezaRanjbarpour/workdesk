@@ -22,8 +22,10 @@ export function ajax_error(response, code) {
       });
       break;
     case 401:
-      showLogin();
+      // showLogin();
+      window.location.replace('/login')
       break;
+
     case 403:
       Swal.fire({
         icon: "error",
@@ -34,8 +36,10 @@ export function ajax_error(response, code) {
       });
       break;
     case 419:
-      showLogin()
+      // showLogin();
+      window.location.replace('/login')
       break;
+
     case 422:
       $.each(errors, function (key, value) {
         for (let i = 0; i < value.length; i++) {
@@ -53,6 +57,7 @@ export function ajax_error(response, code) {
         confirmButtonText: "متوجه شدم",
       });
       break;
+      
     case 500:
       Swal.fire({
         icon: "error",
